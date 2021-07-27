@@ -57,7 +57,9 @@ class printfulStream(RESTStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
-        params: dict = {}
+        params: dict = {
+            "limit": 100
+        }
 
         if next_page_token:
             params["offset"] = next_page_token
