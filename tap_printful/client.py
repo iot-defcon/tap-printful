@@ -37,9 +37,14 @@ class printfulStream(RESTStream):
     ) -> Optional[Any]:
         """Return a token for identifying next page or None if no more pages."""
 
-        total_pages = extract_jsonpath(self.total_pages_jsonpath, input=response.json())
-        offset = extract_jsonpath(self.offset_jsonpath, input=response.json())
-        limit = extract_jsonpath(self.limit_jsonpath, input=response.json())
+        all_matches = extract_jsonpath(self.total_pages_jsonpath, input=response.json())
+        total_pages = next(iter(all_matches), None)
+
+        all_matches = extract_jsonpath(self.offset_jsonpath, input=response.json())
+        offset = next(iter(all_matches), None)
+
+        all_matches = extract_jsonpath(self.limit_jsonpath, input=response.json())
+        limit = next(iter(all_matches), None)
 
         next_offset = int(offset) + int(limit)
 
