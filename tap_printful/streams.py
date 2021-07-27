@@ -1,46 +1,149 @@
 """Stream type classes for tap-printful."""
 
-from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
-from singer_sdk import typing as th  # JSON Schema typing helpers
-
+from singer_sdk import PropertiesList, IntegerType, StringType, ObjectType, ArrayType, BooleanType, Property
 from tap_printful.client import printfulStream
 
-# TODO: Delete this is if not using json files for schema definition
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-# TODO: - Override `UsersStream` and `GroupsStream` with your own stream definition.
-#       - Copy-paste as many times as needed to create multiple stream types.
 
-
-class UsersStream(printfulStream):
-    """Define custom stream."""
-    name = "users"
-    path = "/users"
+class OrdersStream(printfulStream):
+    name = "orders"
+    path = "/orders"
     primary_keys = ["id"]
-    replication_key = None
-    # Optionally, you may also use `schema_filepath` in place of `schema`:
-    # schema_filepath = SCHEMAS_DIR / "users.json"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property("id", th.StringType),
-        th.Property("age", th.IntegerType),
-        th.Property("email", th.StringType),
-        th.Property("street", th.StringType),
-        th.Property("city", th.StringType),
-        th.Property("state", th.StringType),
-        th.Property("zip", th.StringType),
-    ).to_dict()
-
-
-class GroupsStream(printfulStream):
-    """Define custom stream."""
-    name = "groups"
-    path = "/groups"
-    primary_keys = ["id"]
-    replication_key = "modified"
-    schema = th.PropertiesList(
-        th.Property("name", th.StringType),
-        th.Property("id", th.StringType),
-        th.Property("modified", th.DateTimeType),
+    replication_key = "created"
+    schema = PropertiesList(
+        Property("id", IntegerType),
+        Property("external_id", StringType),
+        Property("store", IntegerType),
+        Property("status", StringType),
+        Property("shipping", StringType),
+        Property("created", IntegerType),
+        Property("updated", IntegerType),
+        Property("recipient", ObjectType(
+            Property("name", StringType),
+            Property("company", StringType),
+            Property("address1", StringType),
+            Property("address2", StringType),
+            Property("city", StringType),
+            Property("state_code", StringType),
+            Property("state_name", StringType),
+            Property("country_code", StringType),
+            Property("country_name", StringType),
+            Property("zip", StringType),
+            Property("phone", StringType),
+            Property("email", StringType)
+        )),
+        Property("items", ArrayType(
+            ObjectType(
+                Property("id", IntegerType),
+                Property("external_id", StringType),
+                Property("variant_id", IntegerType),
+                Property("sync_variant_id", IntegerType),
+                Property("external_variant_id", StringType),
+                Property("warehouse_product_variant_id", IntegerType),
+                Property("quantity", IntegerType),
+                Property("price", StringType),
+                Property("retail_price", StringType),
+                Property("name", StringType),
+                Property("product", ObjectType(
+                    Property("variant_id", IntegerType),
+                    Property("product_id", IntegerType),
+                    Property("image", StringType),
+                    Property("name", StringType)
+                )),
+                Property("files", ArrayType(
+                    ObjectType(
+                        Property("id", IntegerType),
+                        Property("type", StringType),
+                        Property("hash", StringType),
+                        Property("url", StringType),
+                        Property("filename", StringType),
+                        Property("mime_type", StringType),
+                        Property("size", IntegerType),
+                        Property("width", IntegerType),
+                        Property("height", IntegerType),
+                        Property("dpi", IntegerType),
+                        Property("status", StringType),
+                        Property("created", IntegerType),
+                        Property("thumbnail_url", StringType),
+                        Property("preview_url", StringType),
+                        Property("visible", BooleanType),
+                        Property("options", ArrayType(
+                            ObjectType(
+                                Property("id", StringType),
+                                Property("value", StringType)
+                            )
+                        )),
+                    )
+                )),
+                Property("options", ArrayType(
+                    ObjectType(
+                        Property("id", StringType),
+                        Property("value", StringType)
+                    )
+                )),
+                Property("sku", StringType)
+            )
+        )),
+        Property("incomplete_items", ArrayType(
+            ObjectType(
+                Property("name", StringType),
+                Property("quantity", IntegerType),
+                Property("sync_variant_id", IntegerType),
+                Property("external_variant_id", StringType),
+                Property("external_line_item_id", StringType)
+            )
+        )),
+        Property("costs", ArrayType(
+            ObjectType(
+                Property("currency", StringType),
+                Property("subtotal", StringType),
+                Property("discount", StringType),
+                Property("shipping", StringType),
+                Property("digitiazation", StringType),
+                Property("tax", StringType),
+                Property("vat", StringType),
+                Property("total", StringType),
+            )
+        )),
+        Property("retail_costs", ArrayType(
+            ObjectType(
+                Property("currency", StringType),
+                Property("subtotal", StringType),
+                Property("discount", StringType),
+                Property("shipping", StringType),
+                Property("digitiazation", StringType),
+                Property("tax", StringType),
+                Property("vat", StringType),
+                Property("total", StringType),
+            )
+        )),
+        Property("pricing_breakdown", ArrayType()),
+        Property("shipments", ArrayType(
+            ObjectType(
+                Property("id", IntegerType),
+                Property("carrier", StringType),
+                Property("service", StringType),
+                Property("tracking_number", StringType),
+                Property("tracking_url", StringType),
+                Property("created", IntegerType),
+                Property("ship_date", StringType),
+                Property("shipped_at", IntegerType),
+                Property("reshipment", BooleanType),
+                Property("items", ArrayType(
+                    ObjectType(
+                        Property("item_id", IntegerType),
+                        Property("quantity", IntegerType),
+                    )
+                )),
+            )
+        )),
+        Property("gift", ObjectType(
+            Property("subject", StringType),
+            Property("quantity", StringType),
+        )),
+        Property("packing_slip", ObjectType(
+            Property("email", StringType),
+            Property("phone", StringType),
+            Property("message", StringType),
+            Property("logo_url", StringType),
+        )),
     ).to_dict()
