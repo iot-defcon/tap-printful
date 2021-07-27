@@ -1,6 +1,6 @@
 """Stream type classes for tap-printful."""
 
-from singer_sdk import PropertiesList, IntegerType, StringType, ObjectType, ArrayType, BooleanType, Property
+from singer_sdk.typing import PropertiesList, IntegerType, StringType, ObjectType, ArrayType, BooleanType, Property
 from tap_printful.client import printfulStream
 
 
@@ -116,7 +116,7 @@ class OrdersStream(printfulStream):
                 Property("total", StringType),
             )
         )),
-        Property("pricing_breakdown", ArrayType()),
+        Property("pricing_breakdown", ArrayType(StringType)),
         Property("shipments", ArrayType(
             ObjectType(
                 Property("id", IntegerType),
