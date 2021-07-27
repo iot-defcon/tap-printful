@@ -9,9 +9,6 @@ from singer_sdk.streams import RESTStream
 from tap_printful.auth import printfulAuthenticator
 
 
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
-
-
 class printfulStream(RESTStream):
     """printful stream class."""
 
