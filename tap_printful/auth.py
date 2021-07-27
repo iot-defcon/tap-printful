@@ -10,7 +10,8 @@ class printfulAuthenticator(SimpleAuthenticator):
 
     @classmethod
     def create_for_stream(cls, stream) -> "printfulAuthenticator":
-        encoded_key = b64encode(bytes(stream.config.get("api_key"), "utf-8"))
+        api_key = stream.config.get("api_key")
+        encoded_key = b64encode(bytes(api_key, "utf-8")).decode("utf-8")
 
         return cls(
             stream=stream,
