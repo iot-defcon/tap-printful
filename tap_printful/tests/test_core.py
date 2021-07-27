@@ -1,15 +1,15 @@
 """Tests standard tap features using the built-in SDK tests library."""
 
 import datetime
+import os
 
 from singer_sdk.testing import get_standard_tap_tests
 
 from tap_printful.tap import Tapprintful
 
 SAMPLE_CONFIG = {
-    "api_key": "test",
+    "api_key": os.getenv("API_KEY"),
     "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
-    # TODO: Initialize minimal tap config
 }
 
 
