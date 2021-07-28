@@ -1,7 +1,7 @@
 """Printful tap class."""
 
+import logging
 from typing import List
-
 from pathlib import PurePath
 from singer_sdk import Tap, Stream
 from singer_sdk import typing as th
@@ -27,6 +27,9 @@ class TapPrintful(Tap):
         state: Union[PurePath, str, dict, None] = None,
         parse_env_config: bool = False,
     ) -> None:
+        self.logger.disabled = True
+        logging.getLogger().disabled = True
+
         super().__init__(
             config=config, catalog=catalog, state=state, parse_env_config=True
         )
