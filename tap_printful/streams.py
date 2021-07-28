@@ -123,32 +123,28 @@ class OrdersStream(PrintfulStream):
         ),
         Property(
             "costs",
-            ArrayType(
-                ObjectType(
-                    Property("currency", StringType),
-                    Property("subtotal", StringType),
-                    Property("discount", StringType),
-                    Property("shipping", StringType),
-                    Property("digitiazation", StringType),
-                    Property("tax", StringType),
-                    Property("vat", StringType),
-                    Property("total", StringType),
-                )
+            ObjectType(
+                Property("currency", StringType),
+                Property("subtotal", StringType),
+                Property("discount", StringType),
+                Property("shipping", StringType),
+                Property("digitiazation", StringType),
+                Property("tax", StringType),
+                Property("vat", StringType),
+                Property("total", StringType),
             ),
         ),
         Property(
             "retail_costs",
-            ArrayType(
-                ObjectType(
-                    Property("currency", StringType),
-                    Property("subtotal", StringType),
-                    Property("discount", StringType),
-                    Property("shipping", StringType),
-                    Property("digitiazation", StringType),
-                    Property("tax", StringType),
-                    Property("vat", StringType),
-                    Property("total", StringType),
-                )
+            ObjectType(
+                Property("currency", StringType),
+                Property("subtotal", StringType),
+                Property("discount", StringType),
+                Property("shipping", StringType),
+                Property("digitiazation", StringType),
+                Property("tax", StringType),
+                Property("vat", StringType),
+                Property("total", StringType),
             ),
         ),
         Property("pricing_breakdown", ArrayType(StringType)),
