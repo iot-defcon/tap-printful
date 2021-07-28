@@ -1,4 +1,4 @@
-"""printful tap class."""
+"""Printful tap class."""
 
 from typing import List
 
@@ -14,8 +14,8 @@ STREAM_TYPES = [
 ]
 
 
-class Tapprintful(Tap):
-    """printful tap class."""
+class TapPrintful(Tap):
+    """Printful tap class."""
     name = "tap-printful"
 
     config_jsonschema = th.PropertiesList(

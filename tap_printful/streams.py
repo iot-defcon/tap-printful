@@ -1,10 +1,10 @@
 """Stream type classes for tap-printful."""
 
 from singer_sdk.typing import PropertiesList, IntegerType, StringType, ObjectType, ArrayType, BooleanType, Property
-from tap_printful.client import printfulStream
+from tap_printful.client import PrintfulStream
 
 
-class OrdersStream(printfulStream):
+class OrdersStream(PrintfulStream):
     name = "orders"
     path = "/orders"
     primary_keys = ["id"]

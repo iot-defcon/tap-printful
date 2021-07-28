@@ -5,7 +5,7 @@ import os
 
 from singer_sdk.testing import get_standard_tap_tests
 
-from tap_printful.tap import Tapprintful
+from tap_printful.tap import TapPrintful
 
 SAMPLE_CONFIG = {}
 
@@ -14,7 +14,7 @@ SAMPLE_CONFIG = {}
 def test_standard_tap_tests():
     """Run standard tap tests from the SDK."""
     tests = get_standard_tap_tests(
-        Tapprintful,
+        TapPrintful,
         config=SAMPLE_CONFIG
     )
     for test in tests:

@@ -1,4 +1,4 @@
-"""REST client handling, including printfulStream base class."""
+"""REST client handling, including PrintfulStream base class."""
 
 import requests
 from pathlib import Path
@@ -6,11 +6,11 @@ from typing import Any, Dict, Optional, Union, List, Iterable
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from tap_printful.auth import printfulAuthenticator
+from tap_printful.auth import PrintfulAuthenticator
 
 
-class printfulStream(RESTStream):
-    """printful stream class."""
+class PrintfulStream(RESTStream):
+    """Printful stream class."""
 
     url_base = "https://api.printful.com/"
 
@@ -20,9 +20,9 @@ class printfulStream(RESTStream):
     total_pages_jsonpath = "$.paging.total"
 
     @property
-    def authenticator(self) -> printfulAuthenticator:
+    def authenticator(self) -> PrintfulAuthenticator:
         """Return a new authenticator object."""
-        return printfulAuthenticator.create_for_stream(self)
+        return PrintfulAuthenticator.create_for_stream(self)
 
     @property
     def http_headers(self) -> dict:
