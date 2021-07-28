@@ -5,18 +5,11 @@ plugins:
   extractors:
   - name: tap-printful
     namespace: tap_printful
-    # TODO: To test using Meltano, replace with absolute path
-    #       to the tap-printful.sh script:
     executable: ./tap-printful.sh
     capabilities:
     - state
     - catalog
     - discover
-    settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
-    - name: username
-    - name: password
-      kind: password
   loaders:
   - name: target-jsonl
     variant: andyh1203
