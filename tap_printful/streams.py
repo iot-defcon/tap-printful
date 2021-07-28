@@ -147,7 +147,17 @@ class OrdersStream(PrintfulStream):
                 Property("total", StringType),
             ),
         ),
-        Property("pricing_breakdown", ArrayType(StringType)),
+        Property(
+            "pricing_breakdown",
+            ArrayType(
+                ObjectType(
+                    Property("currency_symbol", StringType),
+                    Property("customer_pays", StringType),
+                    Property("printful_price", StringType),
+                    Property("profit", StringType),
+                )
+            ),
+        ),
         Property(
             "shipments",
             ArrayType(
