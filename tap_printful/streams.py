@@ -96,15 +96,6 @@ class OrdersStream(PrintfulStream):
                             )
                         ),
                     ),
-                    Property(
-                        "options",
-                        ArrayType(
-                            ObjectType(
-                                Property("id", StringType),
-                                Property("value", StringType),
-                            )
-                        ),
-                    ),
                     Property("sku", StringType),
                 )
             ),
