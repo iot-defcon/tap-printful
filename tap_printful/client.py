@@ -1,9 +1,7 @@
 """REST client handling, including PrintfulStream base class."""
 
 import requests
-from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
-
+from typing import Any, Dict, Optional, Iterable
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
 from tap_printful.auth import PrintfulAuthenticator
@@ -54,9 +52,7 @@ class PrintfulStream(RESTStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         """Return a dictionary of values to be used in URL parameterization."""
-        params: dict = {
-            "limit": 100
-        }
+        params: dict = {"limit": 100}
 
         if next_page_token:
             params["offset"] = next_page_token

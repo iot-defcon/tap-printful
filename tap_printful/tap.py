@@ -3,19 +3,15 @@
 from typing import List
 
 from singer_sdk import Tap, Stream
-from singer_sdk import typing as th  # JSON schema typing helpers
+from singer_sdk import typing as th
+from tap_printful.streams import OrdersStream
 
-from tap_printful.streams import (
-    OrdersStream
-)
-
-STREAM_TYPES = [
-    OrdersStream
-]
+STREAM_TYPES = [OrdersStream]
 
 
 class TapPrintful(Tap):
     """Printful tap class."""
+
     name = "tap-printful"
 
     config_jsonschema = th.PropertiesList(

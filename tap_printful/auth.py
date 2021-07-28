@@ -14,8 +14,5 @@ class PrintfulAuthenticator(SimpleAuthenticator):
         encoded_key = b64encode(bytes(api_key, "utf-8")).decode("utf-8")
 
         return cls(
-            stream=stream,
-            auth_headers={
-                "Authorization": f"Basic {encoded_key}"
-            }
+            stream=stream, auth_headers={"Authorization": f"Basic {encoded_key}"}
         )
