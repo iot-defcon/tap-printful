@@ -84,15 +84,6 @@ class OrdersStream(PrintfulStream):
                                 Property("thumbnail_url", StringType),
                                 Property("preview_url", StringType),
                                 Property("visible", BooleanType),
-                                Property(
-                                    "options",
-                                    ArrayType(
-                                        ObjectType(
-                                            Property("id", StringType),
-                                            Property("value", StringType),
-                                        )
-                                    ),
-                                ),
                             )
                         ),
                     ),
