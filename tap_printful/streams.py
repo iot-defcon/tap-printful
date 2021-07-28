@@ -8,7 +8,7 @@ class OrdersStream(printfulStream):
     name = "orders"
     path = "/orders"
     primary_keys = ["id"]
-    replication_key = "created"
+    replication_key = None
     schema = PropertiesList(
         Property("id", IntegerType),
         Property("external_id", StringType),
