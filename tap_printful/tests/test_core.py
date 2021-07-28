@@ -7,9 +7,7 @@ from singer_sdk.testing import get_standard_tap_tests
 
 from tap_printful.tap import Tapprintful
 
-SAMPLE_CONFIG = {
-    "start_date": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
-}
+SAMPLE_CONFIG = {}
 
 
 # Run standard built-in tap tests from the SDK:
