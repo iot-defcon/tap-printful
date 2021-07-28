@@ -1,6 +1,6 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: tap-printful
+project_id: 021cdbaa-b5a7-4e6b-a674-6a93b8166edb
 plugins:
   extractors:
   - name: tap-printful
@@ -10,6 +10,9 @@ plugins:
     - state
     - catalog
     - discover
+    load_schema: printful
+    select:
+      - orders.*
   loaders:
   - name: target-jsonl
     variant: andyh1203
