@@ -15,7 +15,7 @@ class PrintfulStream(RESTStream):
     records_jsonpath = "$.result[*]"
     offset_jsonpath = "$.paging.offset"
     limit_jsonpath = "$.paging.limit"
-    total_pages_jsonpath = "$.paging.total"
+    total_jsonpath = "$.paging.total"
 
     @property
     def authenticator(self) -> PrintfulAuthenticator:
@@ -32,8 +32,8 @@ class PrintfulStream(RESTStream):
     ) -> Optional[Any]:
         """Return a token for identifying next page or None if no more pages."""
 
-        all_matches = extract_jsonpath(self.total_pages_jsonpath, input=response.json())
-        total_pages = next(iter(all_matches), None)
+        all_matches = extract_jsonpath(self.total_jsonpath, input=response.json())
+        total = next(iter(all_matches), None)
 
         all_matches = extract_jsonpath(self.offset_jsonpath, input=response.json())
         offset = next(iter(all_matches), None)
@@ -43,7 +43,7 @@ class PrintfulStream(RESTStream):
 
         next_offset = int(offset) + int(limit)
 
-        if next_offset >= int(total_pages) * int(limit):
+        if next_offset >= int(total):
             return None
 
         return next_offset
