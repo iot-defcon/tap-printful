@@ -35,6 +35,32 @@ tap-printful --help
 tap-printful --config CONFIG --discover > ./catalog.json
 ```
 
+### Using with Meltano
+
+```yaml
+plugins:
+  extractors:
+  - name: tap-printful
+    namespace: tap_printful
+    pip_url: git+https://github.com/urbandictionary/tap-printful.git
+    executable: tap-printful
+    load_schema: printful
+    capabilities:
+    - discover
+    - catalog
+    settings:
+    - name: api_key
+```
+
+### Supported streams
+
+Only `orders` stream is supported.
+Incremental updates are not supported because of quirky Printful API pagination and inability to change
+sorting field and order.
+
+So, the best solution (if you don't have too many orders) is using FULL_TABLE replication method in your
+target plugin.
+
 ### Initialize your Development Environment
 
 ```bash
