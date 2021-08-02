@@ -33,6 +33,7 @@ You can easily run `tap-printful` by itself or in a pipeline using [Meltano](www
 tap-printful --version
 tap-printful --help
 tap-printful --config CONFIG --discover > ./catalog.json
+tap-printful --config CONFIG
 ```
 
 ### Using with Meltano
@@ -42,7 +43,7 @@ plugins:
   extractors:
   - name: tap-printful
     namespace: tap_printful
-    pip_url: git+https://github.com/urbandictionary/tap-printful.git
+    pip_url: git+https://github.com/urbandictionary/tap-printful.git@v0.0.1
     executable: tap-printful
     load_schema: printful
     capabilities:
@@ -85,12 +86,7 @@ poetry run tap-printful --help
 
 ### Testing with [Meltano](https://www.meltano.com)
 
-_**Note:** This tap will work in any Singer environment and does not require Meltano.
-Examples here are for convenience and to streamline end-to-end orchestration scenarios._
-
-Your project comes with a custom `meltano.yml` project file already created.
-
-Next, install Meltano (if you haven't already) and any needed plugins:
+Install Meltano (if you haven't already) and any needed plugins:
 
 ```bash
 # Install meltano
@@ -108,8 +104,3 @@ meltano invoke tap-printful --version
 # OR run a test `elt` pipeline:
 meltano elt tap-printful target-jsonl
 ```
-
-### SDK Dev Guide
-
-See the [dev guide](https://sdk.meltano.com/en/latest/dev_guide.html) for more instructions on how to use the SDK to 
-develop your own taps and targets.
